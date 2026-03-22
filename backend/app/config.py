@@ -18,12 +18,10 @@ class Settings(BaseSettings):
     jwt_expire_minutes: int = 480  # 8 hours
 
     # ── CORS ──
-    # Specify allowed origins (comma-separated via CORS_ORIGINS env var)
+    # Override via CORS_ORIGINS env var (comma-separated)
     cors_origins: list[str] = [
         "http://localhost:3000",
         "http://localhost:3001",
-        "https://quantora.vercel.app",
-        "https://quantora-ai.vercel.app",
     ]
 
     # ── App ──
