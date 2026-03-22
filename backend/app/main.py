@@ -16,6 +16,7 @@ Usage:
 import os
 import sys
 import logging
+import asyncio
 from datetime import datetime, timezone
 
 from fastapi import FastAPI
@@ -27,7 +28,7 @@ from starlette.requests import Request
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from app.config import get_settings
-from app.database import init_db
+from app.database import init_db, async_session
 
 # ── Logging ──
 logging.basicConfig(
@@ -112,9 +113,12 @@ async def health_check():
 
 
 # ── Startup ──
+_keepalive_task = None
+
 @app.on_event("startup")
 async def startup():
     """Initialize database, create default accounts, and optionally seed data."""
+    global _keepalive_task
     await init_db()
     logger.info("Database initialized")
 
@@ -127,7 +131,30 @@ async def startup():
     else:
         logger.info("Enterprise mode — empty database, awaiting real data input")
 
+    # ── Start Supabase keep-alive (free tier anti-pause) ──
+    _keepalive_task = asyncio.create_task(_db_keepalive())
+
     logger.info("Quantora AI Enterprise started on port 8000")
+
+
+@app.on_event("shutdown")
+async def shutdown():
+    global _keepalive_task
+    if _keepalive_task:
+        _keepalive_task.cancel()
+
+
+async def _db_keepalive():
+    """Ping the database every 4 minutes to prevent Supabase free tier from pausing."""
+    from sqlalchemy import text
+    while True:
+        await asyncio.sleep(240)  # 4 minutes
+        try:
+            async with async_session() as session:
+                await session.execute(text("SELECT 1"))
+            logger.debug("DB keep-alive ping OK")
+        except Exception as e:
+            logger.warning(f"DB keep-alive ping failed: {e}")
 
 
 async def _create_default_accounts():
