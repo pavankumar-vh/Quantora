@@ -35,6 +35,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(name)s] %(levelname)s — %(message)s",
     datefmt="%H:%M:%S",
+    stream=sys.stdout,
 )
 logger = logging.getLogger("quantora")
 
@@ -134,7 +135,8 @@ async def startup():
     # ── Start Supabase keep-alive (free tier anti-pause) ──
     _keepalive_task = asyncio.create_task(_db_keepalive())
 
-    logger.info("Quantora AI Enterprise started on port 8000")
+    _port = os.environ.get("PORT", "8000")
+    logger.info(f"Quantora AI Enterprise started on port {_port}")
 
 
 @app.on_event("shutdown")
@@ -325,4 +327,5 @@ async def trigger_simulation():
 # ── Entry Point ──
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000, log_level="info")
+    _port = int(os.environ.get("PORT", "8000"))
+    uvicorn.run(app, host="0.0.0.0", port=_port, log_level="info")
