@@ -1,12 +1,14 @@
 /** @type {import('next').NextConfig} */
+const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:8000';
+
 const nextConfig = {
-    // Proxy API requests to the SAGRA backend during development.
-    // In production, configure this at the reverse proxy / load balancer level.
+    // Proxy all /api/v1/* requests to the backend.
+    // Browser never calls backend directly → no CORS issues.
     async rewrites() {
         return [
             {
-                source: '/api/sagra/:path*',
-                destination: 'http://localhost:8000/:path*',
+                source: '/api/v1/:path*',
+                destination: `${BACKEND_URL}/:path*`,
             },
         ];
     },

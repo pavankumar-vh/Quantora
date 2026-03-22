@@ -8,7 +8,9 @@
 
 import type { Transaction, GraphNode, GraphEdge, RiskLevel } from '@/lib/mockData';
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+// All API calls go through Next.js rewrite proxy (/api/v1/* → backend).
+// This avoids CORS issues since the browser only talks to the same origin.
+const API_BASE = '/api/v1';
 
 
 // ─────────────────────────────────────────────────────
