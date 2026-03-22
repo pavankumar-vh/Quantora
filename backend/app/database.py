@@ -37,7 +37,8 @@ if _is_pg:
     engine = create_async_engine(
         _db_url,
         echo=_settings.debug,
-        connect_args={"ssl": _ssl_ctx, "prepared_statement_cache_size": 0},
+        connect_args={"ssl": _ssl_ctx, "prepared_statement_cache_size": 0, "statement_cache_size": 0},
+        pool_pre_ping=True,
     )
 else:
     engine = create_async_engine(

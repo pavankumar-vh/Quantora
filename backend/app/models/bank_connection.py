@@ -14,7 +14,7 @@ class BankConnection(Base):
     api_key_masked: Mapped[str] = mapped_column(String(50))  # e.g. "sk-****7f2a"
     endpoint_url: Mapped[str] = mapped_column(String(500))
     status: Mapped[str] = mapped_column(String(20), default="connected")
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
     def to_dict(self) -> dict:
         return {

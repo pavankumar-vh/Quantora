@@ -13,7 +13,7 @@ class Transaction(Base):
     sender: Mapped[str] = mapped_column(String(20), index=True)
     receiver: Mapped[str] = mapped_column(String(20), index=True)
     amount: Mapped[float] = mapped_column(Float)
-    timestamp: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc), index=True)
+    timestamp: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), index=True)
 
     # SAGRA scores
     risk_score: Mapped[float] = mapped_column(Float, default=0.0)

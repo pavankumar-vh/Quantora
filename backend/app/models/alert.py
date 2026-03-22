@@ -14,7 +14,7 @@ class Alert(Base):
     type: Mapped[str] = mapped_column(String(50))  # e.g. "fraud_detected", "high_risk_cluster"
     severity: Mapped[str] = mapped_column(String(10))  # critical, high, medium
     status: Mapped[str] = mapped_column(String(20), default="active")  # active, resolved, dismissed
-    timestamp: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc), index=True)
+    timestamp: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), index=True)
     sender: Mapped[str] = mapped_column(String(20), default="")
     receiver: Mapped[str] = mapped_column(String(20), default="")
     amount: Mapped[float] = mapped_column(Float, default=0.0)
