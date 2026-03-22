@@ -19,7 +19,12 @@ class Settings(BaseSettings):
 
     # ── CORS ──
     # Specify allowed origins (comma-separated via CORS_ORIGINS env var)
-    cors_origins: list[str] = ["http://localhost:3000", "http://localhost:3001"]
+    cors_origins: list[str] = [
+        "http://localhost:3000",
+        "http://localhost:3001",
+        "https://quantora.vercel.app",
+        "https://quantora-ai.vercel.app",
+    ]
 
     # ── App ──
     app_name: str = "Quantora AI"
