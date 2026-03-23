@@ -4,6 +4,6 @@
   "outputDirectory": ".next",
   "installCommand": "npm install",
   "env": {
-    "NEXT_PUBLIC_API_URL": "https://quantora-production.up.railway.app"
+    "NEXT_PUBLIC_API_URL": "https://valiant-truth-production.up.railway.app"
   }
 }
