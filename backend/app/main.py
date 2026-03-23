@@ -31,12 +31,21 @@ from app.config import get_settings
 from app.database import init_db, async_session
 
 # ── Logging ──
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(name)s] %(levelname)s — %(message)s",
-    datefmt="%H:%M:%S",
-    stream=sys.stdout,
-)
+# Force ALL loggers (including uvicorn) to write to stdout.
+# Railway treats stderr as "error" level, so we must avoid stderr entirely.
+_handler = logging.StreamHandler(sys.stdout)
+_handler.setFormatter(logging.Formatter(
+    "%(asctime)s [%(name)s] %(levelname)s — %(message)s", datefmt="%H:%M:%S"
+))
+logging.root.handlers = [_handler]
+logging.root.setLevel(logging.INFO)
+
+# Override uvicorn's default stderr loggers
+for _uv_name in ("uvicorn", "uvicorn.error", "uvicorn.access"):
+    _uv_logger = logging.getLogger(_uv_name)
+    _uv_logger.handlers = [_handler]
+    _uv_logger.propagate = False
+
 logger = logging.getLogger("quantora")
 
 settings = get_settings()
