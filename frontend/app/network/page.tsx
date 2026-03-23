@@ -12,6 +12,8 @@ import {
 } from 'lucide-react';
 import { fetchGraphData, fetchNodeDetail, type GraphData, type NodeDetail, type StoredTransaction } from '@/lib/api';
 import { FRAUD_CLUSTER_IDS, type GraphNode, type GraphEdge } from '@/lib/mockData';
+import RiskPanel from '@/components/RiskPanel';
+import { calculateRisk, getDefaultRiskScore, type RiskScore } from '@/lib/riskEngine';
 
 // ── Colors ──
 const NODE_COLOR: Record<string, string> = { high: '#dc2626', medium: '#d97706', low: '#3b82f6' };
@@ -303,6 +305,22 @@ export default function NetworkPage() {
     const [hoveredNode, setHoveredNode] = useState<string | null>(null);
     const [riskFilter, setRiskFilter] = useState<RiskFilter>({ high: true, medium: true, low: true });
     const [density, setDensity] = useState(0);
+    const [riskScore, setRiskScore] = useState<RiskScore>(getDefaultRiskScore());
+
+    // Compute risk score when a node is selected
+    useEffect(() => {
+        if (!selectedNode) {
+            setRiskScore(getDefaultRiskScore());
+            return;
+        }
+        const node = nodes.find(n => n.id === selectedNode);
+        if (!node) {
+            setRiskScore(getDefaultRiskScore());
+            return;
+        }
+        const connectedEdges = edges.filter(e => e.source === node.id || e.target === node.id);
+        setRiskScore(calculateRisk({ node, connectedEdges, allNodes: nodes }));
+    }, [selectedNode, nodes, edges]);
 
     // Track container size
     useEffect(() => {
@@ -711,6 +729,14 @@ export default function NetworkPage() {
                             onSelectNode={(id) => setSelectedNode(id)}
                         />
                     )}
+
+                    {/* Risk Intelligence Panel — always visible */}
+                    <div className="w-[280px] flex-shrink-0 border-l border-[var(--border)] bg-[var(--surface)]">
+                        <RiskPanel
+                            selectedNode={nodes.find(n => n.id === selectedNode) ?? null}
+                            riskScore={riskScore}
+                        />
+                    </div>
                 </div>
             </div>
         </div>

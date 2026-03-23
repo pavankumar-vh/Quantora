@@ -100,17 +100,17 @@ export default function AlgorithmPage() {
                         <div className="rounded-md border border-[var(--border)] bg-[var(--bg)] px-5 py-2">
                             <Formula
                                 label="TRS"
-                                formula="TRS = min(amount / 10000, 1)"
+                                formula="TRS = min(amount / 50000, 1)"
                                 color="bg-blue-500/10 text-blue-400"
                             />
                             <Formula
                                 label="GRS"
-                                formula="GRS = min(sender_degree × 5, 1)"
+                                formula="GRS = min(sender_degree × 3, 1)"
                                 color="bg-purple-500/10 text-purple-400"
                             />
                             <Formula
                                 label="NDB"
-                                formula="NDB = 0.3  if sender_degree > 0.05  else 0"
+                                formula="NDB = 0.3  if sender_degree > 0.15  else 0"
                                 color="bg-amber-500/10 text-amber-400"
                             />
                             <Formula
@@ -139,25 +139,25 @@ export default function AlgorithmPage() {
                                 title="Transaction Risk (TRS)"
                                 icon={Activity}
                                 accent="bg-blue-500/10 text-blue-400"
-                                description="Normalizes transaction amount to [0,1]. Amounts approaching $10,000 carry maximum monetary risk due to regulatory reporting thresholds (BSA/AML). This is the strongest individual predictor, weighted at 50%."
+                                description="Normalizes transaction amount to [0,1]. Amounts approaching ₹50,000 carry maximum monetary risk due to regulatory reporting thresholds (PMLA/RBI). This is the strongest individual predictor, weighted at 50%."
                             />
                             <ExplainCard
                                 title="Graph Risk (GRS)"
                                 icon={GitBranch}
                                 accent="bg-purple-500/10 text-purple-400"
-                                description="Converts sender degree centrality into a risk signal. High-degree senders are statistically more likely to be involved in fan-out attacks, money mule networks, or layering schemes. Amplified by 5× to flag hub nodes early."
+                                description="Converts sender degree centrality into a risk signal. High-degree senders are statistically more likely to be involved in fan-out attacks, money mule networks, or layering schemes. Amplified by 3× to flag hub nodes early."
                             />
                             <ExplainCard
                                 title="Network Density Boost (NDB)"
                                 icon={Zap}
                                 accent="bg-amber-500/10 text-amber-400"
-                                description="Activates a +0.3 risk boost when sender connectivity exceeds a minimum threshold (degree > 0.05). This makes SAGRA adaptive — nodes becoming increasingly connected receive automatic risk escalation, catching 'smurfing' patterns."
+                                description="Activates a +0.3 risk boost when sender connectivity exceeds a minimum threshold (degree > 0.15). This makes SAGRA adaptive — nodes becoming increasingly connected receive automatic risk escalation, catching 'smurfing' patterns."
                             />
                             <ExplainCard
                                 title="Adaptive Thresholding"
                                 icon={Shield}
                                 accent="bg-emerald-500/10 text-emerald-400"
-                                description="The NDB threshold (0.05) can be dynamically tuned per customer segment, time-of-day, or via online learning feedback loops. The decision boundary (0.7) and component weights can be optimized via grid search or Bayesian optimization."
+                                description="The NDB threshold (0.15) can be dynamically tuned per customer segment, time-of-day, or via online learning feedback loops. The decision boundary (0.7) and component weights can be optimized via grid search or Bayesian optimization."
                             />
                         </div>
                     </Section>
