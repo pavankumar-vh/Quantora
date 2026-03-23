@@ -18,11 +18,9 @@ class Settings(BaseSettings):
     jwt_expire_minutes: int = 480  # 8 hours
 
     # ── CORS ──
-    # Override via CORS_ORIGINS env var (comma-separated)
-    cors_origins: list[str] = [
-        "http://localhost:3000",
-        "http://localhost:3001",
-    ]
+    # Plain string so pydantic-settings never tries to JSON-parse it.
+    # Set CORS_ORIGINS env var as comma-separated URLs.
+    cors_origins: str = "http://localhost:3000,http://localhost:3001"
 
     # ── App ──
     app_name: str = "Quantora AI"
@@ -32,6 +30,10 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
+
+    def get_cors_list(self) -> list[str]:
+        """Split the comma-separated CORS_ORIGINS string into a list."""
+        return [o.strip() for o in self.cors_origins.split(",") if o.strip()]
 
 
 @lru_cache

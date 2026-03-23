@@ -60,11 +60,8 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
 
 app.add_middleware(SecurityHeadersMiddleware)
 
-# Build CORS origins: configured list + any CORS_ORIGINS env var entries
-_cors_origins = list(settings.cors_origins)
-_extra = os.environ.get("CORS_ORIGINS", "")
-if _extra:
-    _cors_origins.extend([o.strip() for o in _extra.split(",") if o.strip()])
+# Build CORS origins from the comma-separated config string
+_cors_origins = settings.get_cors_list()
 
 app.add_middleware(
     CORSMiddleware,
