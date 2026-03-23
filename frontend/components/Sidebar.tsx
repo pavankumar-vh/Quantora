@@ -9,9 +9,8 @@ import { useTheme } from '@/components/ThemeProvider';
 
 const NAV_ITEMS = [
     { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-    { label: 'Risk Intelligence', href: '/', icon: Network },
+    { label: 'Risk Intelligence', href: '/network', icon: Network },
     { label: 'Analytics', href: '/analytics', icon: BarChart3 },
-    { label: 'Network Graph', href: '/network', icon: GitBranch },
     { label: 'Transactions', href: '/transactions', icon: List },
     { label: 'Algorithm', href: '/algorithm', icon: Brain },
     { label: 'API Integration', href: '/api-integration', icon: Plug },
