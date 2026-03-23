@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import SimulationOverlay from '@/components/SimulationOverlay';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import RouteGuard from '@/components/auth/RouteGuard';
+import AuthSimulationOverlay from '@/components/auth/AuthSimulationOverlay';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,7 +22,7 @@ export default function RootLayout({
             <body className={`${inter.className} antialiased`}>
                 <ThemeProvider>
                     <RouteGuard>{children}</RouteGuard>
-                    <SimulationOverlay />
+                    <AuthSimulationOverlay />
                 </ThemeProvider>
             </body>
         </html>

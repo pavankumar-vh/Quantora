@@ -90,7 +90,7 @@ interface LogEntry {
 // ── Simulation Overlay Component ───────────────────────────────────
 
 export default function SimulationOverlay() {
-    const [visible, setVisible] = useState(true);
+    const [visible, setVisible] = useState(false);
     const [running, setRunning] = useState(false);
     const [minimized, setMinimized] = useState(false);
     const [log, setLog] = useState<LogEntry[]>([]);
@@ -278,17 +278,6 @@ export default function SimulationOverlay() {
             if (intervalRef.current) clearInterval(intervalRef.current);
         };
     }, []);
-
-    // Auto-start simulation on mount so portfolio visitors see live activity
-    const autoStarted = useRef(false);
-    useEffect(() => {
-        if (!autoStarted.current && !running) {
-            autoStarted.current = true;
-            // Small delay to let the page render first
-            const t = setTimeout(() => startSimulation(), 1500);
-            return () => clearTimeout(t);
-        }
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     if (!visible) return null;
 
