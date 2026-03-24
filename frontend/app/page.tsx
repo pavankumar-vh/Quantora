@@ -14,9 +14,10 @@ import {
   Brain, Eye, Globe, Lock, Cpu,
   AlertTriangle, CheckCircle, GitBranch, Layers,
   Search, BarChart3, Users, Database, Server, Code,
-  TrendingUp, FileText, Fingerprint, Workflow, Check, X, Menu
+  TrendingUp, FileText, Fingerprint, Workflow, Check, X, Menu, Sun, Moon
 } from 'lucide-react';
 import { isAuthenticated } from '@/lib/api';
+import { useTheme } from '@/components/ThemeProvider';
 
 /* ═══════════════════════════════════════════════ */
 /* ═══         3D WIREFRAME GLOBE              ═══ */
@@ -300,6 +301,7 @@ export default function LandingPage() {
   const router = useRouter();
   const [authed, setAuthed] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
   const { scrollYProgress } = useScroll();
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -120]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -60]);
@@ -409,6 +411,14 @@ export default function LandingPage() {
                 </motion.button>
               </>
             )}
+            {/* Theme toggle */}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              className="p-2 rounded-md border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface)] transition-all duration-200"
+            >
+              {theme === 'dark' ? <Sun size={14} strokeWidth={1.5} /> : <Moon size={14} strokeWidth={1.5} />}
+            </button>
             {/* Mobile menu toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
