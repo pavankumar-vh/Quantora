@@ -99,7 +99,7 @@ export default function ClusterTable({ clusters }: ClusterTableProps) {
                                     </td>
                                     <td className="px-5 py-3.5">
                                         <button
-                                            onClick={() => router.push(`/analysis/${cluster.clusterId}`)}
+                                            onClick={() => router.push('/network')}
                                             className="flex items-center gap-1 text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border)] hover:border-zinc-500 rounded-md px-2.5 py-1.5 transition-all duration-150"
                                         >
                                             View Graph <ArrowUpRight size={10} strokeWidth={1.5} />

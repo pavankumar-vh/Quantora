@@ -24,7 +24,7 @@ export default function ClusterAnalysisPage() {
                         </span>
                     </div>
                     <Link
-                        href="/"
+                        href="/network"
                         className="flex items-center gap-1.5 text-[10px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] border border-[var(--border)] hover:border-zinc-500 rounded-md px-2.5 py-1.5 transition-all duration-150"
                     >
                         <Shield size={11} strokeWidth={1.5} /> Open Risk Intelligence Graph
@@ -48,7 +48,7 @@ export default function ClusterAnalysisPage() {
                             </p>
                         </div>
                         <Link
-                            href="/"
+                            href="/network"
                             className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-[var(--surface)] border border-[var(--border)] text-[11px] font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-zinc-500 transition-all duration-150"
                         >
                             View Risk Intelligence Graph →

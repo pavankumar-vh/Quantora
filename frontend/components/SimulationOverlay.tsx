@@ -90,7 +90,6 @@ interface LogEntry {
 // ── Simulation Overlay Component ───────────────────────────────────
 
 export default function SimulationOverlay() {
-    const [visible, setVisible] = useState(false);
     const [running, setRunning] = useState(false);
     const [minimized, setMinimized] = useState(false);
     const [log, setLog] = useState<LogEntry[]>([]);
@@ -110,17 +109,7 @@ export default function SimulationOverlay() {
         setLog(prev => [...prev.slice(-40), entry]);
     }, []);
 
-    // Global keyboard listener: Ctrl+Shift+D
-    useEffect(() => {
-        const handler = (e: KeyboardEvent) => {
-            if (e.ctrlKey && e.shiftKey && e.key === 'D') {
-                e.preventDefault();
-                setVisible(v => !v);
-            }
-        };
-        window.addEventListener('keydown', handler);
-        return () => window.removeEventListener('keydown', handler);
-    }, []);
+
 
     // Auto-scroll log
     useEffect(() => {
@@ -279,8 +268,6 @@ export default function SimulationOverlay() {
         };
     }, []);
 
-    if (!visible) return null;
-
     const typeIcon = (type: LogEntry['type']) => {
         switch (type) {
             case 'fraud': return <AlertTriangle size={10} className="text-red-400 flex-shrink-0" />;
@@ -305,8 +292,8 @@ export default function SimulationOverlay() {
 
     return (
         <div
-            className="fixed bottom-4 right-4 z-[9999] font-mono animate-fade-in"
-            style={{ width: minimized ? '200px' : '420px' }}
+            className="fixed bottom-4 right-4 left-4 sm:left-auto z-[9999] font-mono animate-fade-in"
+            style={{ width: minimized ? '200px' : undefined, maxWidth: minimized ? undefined : '420px' }}
         >
             <div className="rounded-xl border border-[var(--border)] bg-[var(--panel-overlay)] backdrop-blur-xl shadow-2xl shadow-black/20 overflow-hidden">
                 {/* Header */}
@@ -333,13 +320,7 @@ export default function SimulationOverlay() {
                         {minimized ? <Eye size={11} /> : <EyeOff size={11} />}
                     </button>
 
-                    {/* Close */}
-                    <button
-                        onClick={() => { stopSimulation(); setVisible(false); }}
-                        className="text-[var(--text-muted)] hover:text-red-400 transition-colors p-0.5"
-                    >
-                        <X size={11} />
-                    </button>
+
                 </div>
 
                 {/* Mini stats bar (always visible) */}
@@ -391,7 +372,7 @@ export default function SimulationOverlay() {
                             <div className="flex flex-col items-center justify-center py-8 gap-2 text-[var(--text-muted)]">
                                 <Loader2 size={16} className="opacity-30" />
                                 <p className="text-[9px]">Press Start to begin simulation</p>
-                                <p className="text-[8px] opacity-50">Ctrl+Shift+D to toggle this panel</p>
+                                <p className="text-[8px] opacity-50">Transactions will stream into the dashboard</p>
                             </div>
                         ) : (
                             <div className="p-3 space-y-1">
