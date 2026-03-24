@@ -268,7 +268,7 @@ function GraphStatsBar({ stats, density }: {
                 <div className="space-y-1.5">
                     {[
                         { icon: <Circle size={9} className="text-blue-400" />, label: 'Nodes', value: stats.nodes },
-                        { icon: <Activity size={9} className="text-zinc-400" />, label: 'Edges', value: stats.edges },
+                        { icon: <Activity size={9} className="text-[var(--text-muted)]" />, label: 'Edges', value: stats.edges },
                         { icon: <AlertTriangle size={9} className="text-red-400" />, label: 'Fraud Nodes', value: stats.fraud },
                         { icon: <Target size={9} className="text-amber-400" />, label: 'Fraud Rate', value: `${fraudPct}%` },
                         { icon: <Users size={9} className="text-violet-400" />, label: 'Density', value: `${(density * 100).toFixed(1)}%` },
@@ -500,7 +500,7 @@ export default function NetworkPage() {
                 return Math.max(8, Math.min(18, 6 + edgeCount * 0.7));
             })
             .attr('fill', d => NODE_COLOR[d.risk])
-            .attr('stroke', d => d.risk === 'high' ? '#ef4444' : d.risk === 'medium' ? '#d97706' : '#3f3f46')
+            .attr('stroke', d => d.risk === 'high' ? '#ef4444' : d.risk === 'medium' ? '#d97706' : 'var(--graph-stroke-low)')
             .attr('stroke-width', d => d.risk === 'high' ? 2 : 1)
             .attr('opacity', 0.92);
 
@@ -517,7 +517,7 @@ export default function NetworkPage() {
             .text(d => d.id)
             .attr('text-anchor', 'middle').attr('dy', '2.4em')
             .attr('font-size', '8px').attr('font-family', 'JetBrains Mono, monospace')
-            .attr('fill', '#71717a').attr('pointer-events', 'none');
+            .attr('fill', 'var(--graph-label)').attr('pointer-events', 'none');
 
         // Hover + click interactions
         node.on('mouseenter', function (ev, d) {
@@ -620,7 +620,7 @@ export default function NetworkPage() {
                             <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-sm bg-blue-500/10 border border-blue-500/25 text-blue-400">
                                 {stats.nodes} Nodes
                             </span>
-                            <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-sm bg-zinc-700/40 border border-zinc-600/25 text-zinc-400">
+                            <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-sm bg-[var(--surface-hover)] border border-[var(--border)] text-[var(--text-muted)]">
                                 {stats.edges} Edges
                             </span>
                             <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-sm bg-red-500/10 border border-red-500/25 text-red-400">

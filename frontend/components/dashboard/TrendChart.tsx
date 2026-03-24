@@ -74,10 +74,10 @@ export default function TrendChart({ data }: TrendChartProps) {
                         type="monotone"
                         dataKey="total"
                         name="Transactions"
-                        stroke="#3f3f46"
+                        stroke="var(--chart-line-total)"
                         strokeWidth={1.5}
                         dot={false}
-                        activeDot={{ r: 3, fill: '#3f3f46' }}
+                        activeDot={{ r: 3, fill: 'var(--chart-line-total)' }}
                     />
                     <Line
                         type="monotone"

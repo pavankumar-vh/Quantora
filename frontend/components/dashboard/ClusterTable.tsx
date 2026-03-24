@@ -18,11 +18,11 @@ interface ClusterTableProps {
 function riskBadge(score: number) {
     if (score >= 0.8) return { label: 'High', className: 'bg-red-500/12 text-red-400 border border-red-500/25' };
     if (score >= 0.5) return { label: 'Medium', className: 'bg-amber-500/12 text-amber-400 border border-amber-500/25' };
-    return { label: 'Low', className: 'bg-zinc-700/40 text-zinc-400 border border-zinc-600/25' };
+    return { label: 'Low', className: 'bg-[var(--surface-hover)] text-[var(--text-muted)] border border-[var(--border)]' };
 }
 
 function scoreBar(score: number) {
-    const color = score >= 0.8 ? '#dc2626' : score >= 0.5 ? '#d97706' : '#52525b';
+    const color = score >= 0.8 ? '#dc2626' : score >= 0.5 ? '#d97706' : 'var(--graph-stroke-low)';
     return (
         <div className="flex items-center gap-2">
             <div className="w-16 h-1 rounded-full bg-[var(--border)] overflow-hidden">

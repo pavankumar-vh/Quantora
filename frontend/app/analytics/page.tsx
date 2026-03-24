@@ -173,7 +173,7 @@ export default function AnalyticsPage() {
                                         {/* Safe arc */}
                                         <circle
                                             cx="50" cy="50" r="40"
-                                            fill="none" stroke="#3f3f46" strokeWidth="10"
+                                            fill="none" stroke="var(--chart-line-total)" strokeWidth="10"
                                             strokeDasharray={`${(safeCount / Math.max(stats.total, 1)) * 251.3} 251.3`}
                                         />
                                         {/* Fraud arc */}

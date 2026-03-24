@@ -114,7 +114,7 @@ export default function AdminPage() {
                     </div>
                     <button
                         onClick={() => setShowCreate(!showCreate)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 bg-white text-[var(--bg)] rounded-md text-[10px] font-mono font-semibold uppercase tracking-wider hover:bg-zinc-200 transition-colors"
+                        className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--btn-primary-bg)] text-[var(--btn-primary-text)] rounded-md text-[10px] font-mono font-semibold uppercase tracking-wider hover:bg-[var(--btn-primary-hover)] transition-colors"
                     >
                         <Plus size={12} />
                         Create User
@@ -183,7 +183,7 @@ export default function AdminPage() {
                             <div className="col-span-2 flex items-center gap-2 mt-1">
                                 <button
                                     type="submit" disabled={creating}
-                                    className="flex items-center gap-1.5 px-4 py-1.5 bg-white text-[var(--bg)] rounded-md text-[10px] font-mono font-semibold uppercase tracking-wider hover:bg-zinc-200 disabled:opacity-40 transition-colors"
+                                    className="flex items-center gap-1.5 px-4 py-1.5 bg-[var(--btn-primary-bg)] text-[var(--btn-primary-text)] rounded-md text-[10px] font-mono font-semibold uppercase tracking-wider hover:bg-[var(--btn-primary-hover)] disabled:opacity-40 transition-colors"
                                 >
                                     {creating ? 'Creating...' : 'Create Account'}
                                 </button>

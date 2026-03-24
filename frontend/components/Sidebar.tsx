@@ -44,8 +44,8 @@ export default function Sidebar() {
             {/* Logo */}
             <div className="h-14 flex items-center justify-between border-b border-[var(--border)]">
                 <Link href="/" className="flex-1 h-full flex items-center gap-2.5 px-4 hover:bg-[var(--surface)] transition-colors duration-150">
-                    <div className="w-6 h-6 bg-white rounded-sm flex items-center justify-center flex-shrink-0">
-                        <div className="w-3 h-3 bg-[var(--bg)] rounded-[2px]" />
+                    <div className="w-6 h-6 bg-[var(--btn-primary-bg)] rounded-sm flex items-center justify-center flex-shrink-0">
+                        <div className="w-3 h-3 bg-[var(--logo-inner)] rounded-[2px]" />
                     </div>
                     <span className="text-[var(--text-primary)] font-semibold text-sm tracking-tight">Quantora</span>
                 </Link>

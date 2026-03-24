@@ -10,6 +10,9 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
     title: 'Quantora — Network Risk Intelligence',
     description: 'Internal fraud intelligence dashboard for real-time transaction network analysis.',
+    icons: {
+        icon: '/icon.svg',
+    },
 };
 
 export default function RootLayout({

@@ -12,14 +12,14 @@ import type { Transaction, RiskLevel } from '@/lib/mockData';
 function riskColor(risk: RiskLevel) {
     if (risk === 'high') return 'text-red-400';
     if (risk === 'medium') return 'text-amber-400';
-    return 'text-zinc-400';
+    return 'text-[var(--text-muted)]';
 }
 
 function riskBadge(risk: RiskLevel) {
     const map = {
         high: 'bg-red-500/10 text-red-400 border-red-500/25',
         medium: 'bg-amber-500/10 text-amber-400 border-amber-500/25',
-        low: 'bg-zinc-700/40 text-zinc-400 border-zinc-600/25',
+        low: 'bg-[var(--surface-hover)] text-[var(--text-muted)] border-[var(--border)]',
     };
     return map[risk];
 }
@@ -106,7 +106,7 @@ export default function TransactionsPage() {
                         <div className="hidden sm:block w-px h-4 bg-[var(--border)]" />
                         <List size={14} strokeWidth={1.5} className="hidden sm:block text-[var(--text-secondary)]" />
                         <span className="text-xs font-semibold text-[var(--text-primary)]">Transactions</span>
-                        <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-sm bg-zinc-700/40 border border-zinc-600/25 text-zinc-400">
+                        <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-sm bg-[var(--surface-hover)] border border-[var(--border)] text-[var(--text-muted)]">
                             {filtered.length} / {totalCount} records
                         </span>
                     </div>
@@ -188,7 +188,7 @@ export default function TransactionsPage() {
                                                         className="h-full rounded-full transition-all"
                                                         style={{
                                                             width: `${riskNumeric(tx.risk) * 100}%`,
-                                                            backgroundColor: tx.risk === 'high' ? '#dc2626' : tx.risk === 'medium' ? '#d97706' : '#52525b',
+                                                            backgroundColor: tx.risk === 'high' ? '#dc2626' : tx.risk === 'medium' ? '#d97706' : 'var(--graph-stroke-low)',
                                                         }}
                                                     />
                                                 </div>

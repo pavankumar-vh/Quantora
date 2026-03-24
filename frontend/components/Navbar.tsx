@@ -13,8 +13,8 @@ export default function Navbar({ theme, onToggleTheme }: NavbarProps) {
             {/* Left: Logo */}
             <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 bg-white rounded-sm flex items-center justify-center">
-                        <div className="w-3 h-3 bg-[var(--bg)] rounded-[2px]" />
+                    <div className="w-6 h-6 bg-[var(--btn-primary-bg)] rounded-sm flex items-center justify-center">
+                        <div className="w-3 h-3 bg-[var(--logo-inner)] rounded-[2px]" />
                     </div>
                     <span className="text-[var(--text-primary)] font-semibold text-lg tracking-tight">
                         Quantora

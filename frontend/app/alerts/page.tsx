@@ -13,13 +13,13 @@ type AlertStatus = 'active' | 'investigating' | 'resolved';
 const STATUS_CONFIG: Record<AlertStatus, { label: string; dot: string; text: string; bg: string }> = {
     active: { label: 'Active', dot: 'bg-red-500', text: 'text-red-400', bg: 'bg-red-500/10 border-red-500/25' },
     investigating: { label: 'Investigating', dot: 'bg-amber-400', text: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/25' },
-    resolved: { label: 'Resolved', dot: 'bg-zinc-500', text: 'text-zinc-400', bg: 'bg-zinc-700/30 border-zinc-600/25' },
+    resolved: { label: 'Resolved', dot: 'bg-[var(--text-muted)]', text: 'text-[var(--text-muted)]', bg: 'bg-[var(--surface-hover)] border-[var(--border)]' },
 };
 
 function riskColor(score: number) {
     if (score >= 0.8) return 'text-red-400';
     if (score >= 0.5) return 'text-amber-400';
-    return 'text-zinc-400';
+    return 'text-[var(--text-muted)]';
 }
 
 export default function AlertsPage() {
@@ -147,7 +147,7 @@ export default function AlertsPage() {
                                                                     className="h-full rounded-full"
                                                                     style={{
                                                                         width: `${(alert.risk_score || 0) * 100}%`,
-                                                                        backgroundColor: (alert.risk_score || 0) >= 0.8 ? '#dc2626' : (alert.risk_score || 0) >= 0.5 ? '#d97706' : '#52525b',
+                                                                        backgroundColor: (alert.risk_score || 0) >= 0.8 ? '#dc2626' : (alert.risk_score || 0) >= 0.5 ? '#d97706' : 'var(--graph-stroke-low)',
                                                                     }}
                                                                 />
                                                             </div>

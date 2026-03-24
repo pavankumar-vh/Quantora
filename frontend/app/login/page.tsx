@@ -41,8 +41,8 @@ export default function LoginPage() {
             <div className="w-full max-w-sm relative z-10">
                 {/* Logo — matches Sidebar Quantora branding */}
                 <div className="flex items-center justify-center gap-3 mb-10">
-                    <div className="w-8 h-8 bg-white rounded-sm flex items-center justify-center flex-shrink-0">
-                        <div className="w-4 h-4 bg-[var(--bg)] rounded-[2px]" />
+                    <div className="w-8 h-8 bg-[var(--btn-primary-bg)] rounded-sm flex items-center justify-center flex-shrink-0">
+                        <div className="w-4 h-4 bg-[var(--logo-inner)] rounded-[2px]" />
                     </div>
                     <div>
                         <span className="text-[var(--text-primary)] font-semibold text-base tracking-tight">Quantora</span>
@@ -116,7 +116,7 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 mt-2 bg-white text-[var(--bg)] rounded-md text-[11px] font-mono font-semibold uppercase tracking-widest hover:bg-zinc-200 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-150"
+                            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 mt-2 bg-[var(--btn-primary-bg)] text-[var(--btn-primary-text)] rounded-md text-[11px] font-mono font-semibold uppercase tracking-widest hover:bg-[var(--btn-primary-hover)] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-150"
                         >
                             {loading ? (
                                 <div className="w-3.5 h-3.5 border-2 border-[var(--bg)]/30 border-t-[var(--bg)] rounded-full animate-spin" />

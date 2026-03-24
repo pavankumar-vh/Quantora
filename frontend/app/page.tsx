@@ -56,7 +56,7 @@ function RotatingGlobe() {
       {/* Wireframe sphere */}
       <mesh ref={meshRef}>
         <icosahedronGeometry args={[1.5, 2]} />
-        <meshBasicMaterial color="#3f3f46" wireframe transparent opacity={0.15} />
+        <meshBasicMaterial color="#71717a" wireframe transparent opacity={0.15} />
       </mesh>
 
       {/* Inner glowing sphere */}
@@ -70,11 +70,11 @@ function RotatingGlobe() {
       {/* Orbiting ring */}
       <mesh rotation={[Math.PI / 3, 0, 0]}>
         <torusGeometry args={[1.8, 0.008, 8, 100]} />
-        <meshBasicMaterial color="#52525b" transparent opacity={0.3} />
+        <meshBasicMaterial color="#71717a" transparent opacity={0.3} />
       </mesh>
       <mesh rotation={[Math.PI / 5, Math.PI / 4, 0]}>
         <torusGeometry args={[2.0, 0.006, 8, 100]} />
-        <meshBasicMaterial color="#3f3f46" transparent opacity={0.2} />
+        <meshBasicMaterial color="#71717a" transparent opacity={0.2} />
       </mesh>
 
       {/* Scattered node points */}
@@ -126,10 +126,10 @@ function ParticleNetwork() {
     fpsLimit: 60,
     particles: {
       number: { value: 50, density: { enable: true } },
-      color: { value: '#52525b' },
+      color: { value: '#71717a' },
       links: {
         enable: true,
-        color: '#3f3f46',
+        color: '#71717a',
         distance: 150,
         opacity: 0.15,
         width: 0.5,
@@ -372,8 +372,8 @@ export default function LandingPage() {
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
           <motion.div className="flex items-center gap-2.5 cursor-pointer" whileHover={{ scale: 1.02 }}>
-            <div className="w-6 h-6 bg-white rounded-sm flex items-center justify-center flex-shrink-0">
-              <div className="w-3 h-3 bg-[var(--bg)] rounded-[2px]" />
+            <div className="w-6 h-6 bg-[var(--btn-primary-bg)] rounded-sm flex items-center justify-center flex-shrink-0">
+              <div className="w-3 h-3 bg-[var(--logo-inner)] rounded-[2px]" />
             </div>
             <span className="text-[var(--text-primary)] font-semibold text-sm tracking-tight">Quantora</span>
             <span className="hidden sm:inline text-[9px] font-mono text-[var(--text-muted)] uppercase tracking-widest">v3.0</span>
@@ -396,7 +396,7 @@ export default function LandingPage() {
               <span className="text-[9px] font-mono text-emerald-400">Online</span>
             </div>
             {authed ? (
-              <motion.button onClick={() => router.push('/dashboard')} className="px-3 sm:px-4 py-2 rounded-md bg-white text-[var(--bg)] text-[11px] font-mono font-semibold uppercase tracking-widest hover:bg-zinc-200 transition-all duration-150" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+              <motion.button onClick={() => router.push('/dashboard')} className="px-3 sm:px-4 py-2 rounded-md bg-[var(--btn-primary-bg)] text-[var(--btn-primary-text)] text-[11px] font-mono font-semibold uppercase tracking-widest hover:bg-[var(--btn-primary-hover)] transition-all duration-150" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
                 Dashboard
               </motion.button>
             ) : (
@@ -404,7 +404,7 @@ export default function LandingPage() {
                 <motion.button onClick={() => router.push('/login')} className="hidden sm:block px-3 py-2 text-[11px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors duration-150" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
                   Sign In
                 </motion.button>
-                <motion.button onClick={() => router.push('/login')} className="flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-md bg-white text-[var(--bg)] text-[10px] sm:text-[11px] font-mono font-semibold uppercase tracking-widest hover:bg-zinc-200 transition-all duration-150" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                <motion.button onClick={() => router.push('/login')} className="flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-md bg-[var(--btn-primary-bg)] text-[var(--btn-primary-text)] text-[10px] sm:text-[11px] font-mono font-semibold uppercase tracking-widest hover:bg-[var(--btn-primary-hover)] transition-all duration-150" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
                   Get Started <ArrowRight size={11} strokeWidth={2} />
                 </motion.button>
               </>
@@ -489,7 +489,7 @@ export default function LandingPage() {
             </motion.p>
 
             <motion.div className="flex flex-wrap gap-3" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }}>
-              <motion.button onClick={() => router.push('/login')} className="group flex items-center gap-2 px-5 py-2.5 rounded-md bg-white text-[var(--bg)] text-[11px] font-mono font-semibold uppercase tracking-widest hover:bg-zinc-200 transition-all duration-150" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+              <motion.button onClick={() => router.push('/login')} className="group flex items-center gap-2 px-5 py-2.5 rounded-md bg-[var(--btn-primary-bg)] text-[var(--btn-primary-text)] text-[11px] font-mono font-semibold uppercase tracking-widest hover:bg-[var(--btn-primary-hover)] transition-all duration-150" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
                 Launch Dashboard <ArrowRight size={12} strokeWidth={2} className="group-hover:translate-x-0.5 transition-transform" />
               </motion.button>
               <motion.button onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })} className="flex items-center gap-2 px-5 py-2.5 rounded-md border border-[var(--border)] text-[var(--text-secondary)] text-[11px] font-mono hover:bg-[var(--surface)] hover:text-[var(--text-primary)] transition-all duration-150" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
@@ -699,7 +699,7 @@ export default function LandingPage() {
               <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] overflow-hidden">
                 <div className="px-4 py-3 border-b border-[var(--border)] flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 bg-white rounded-sm flex items-center justify-center"><div className="w-2.5 h-2.5 bg-[var(--bg)] rounded-[1px]" /></div>
+                    <div className="w-5 h-5 bg-[var(--btn-primary-bg)] rounded-sm flex items-center justify-center"><div className="w-2.5 h-2.5 bg-[var(--logo-inner)] rounded-[1px]" /></div>
                     <span className="text-[10px] font-mono text-[var(--text-muted)]">quantora / dashboard</span>
                   </div>
                   <div className="flex items-center gap-1.5">
@@ -825,14 +825,14 @@ export default function LandingPage() {
       <section className="relative z-10 py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
           <motion.div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-6 sm:p-10 md:p-14 text-center" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4 }}>
-            <motion.div className="w-10 h-10 mx-auto mb-6 rounded-md bg-white flex items-center justify-center" animate={{ rotate: [0, 3, 0, -3, 0] }} transition={{ duration: 8, repeat: Infinity }}>
-              <Shield size={18} strokeWidth={1.5} className="text-[var(--bg)]" />
+            <motion.div className="w-10 h-10 mx-auto mb-6 rounded-md bg-[var(--btn-primary-bg)] flex items-center justify-center" animate={{ rotate: [0, 3, 0, -3, 0] }} transition={{ duration: 8, repeat: Infinity }}>
+              <Shield size={18} strokeWidth={1.5} className="text-[var(--btn-primary-text)]" />
             </motion.div>
             <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-2">Ready to Detect the Undetectable?</h2>
             <p className="text-[11px] font-mono text-[var(--text-secondary)] mb-6 max-w-md mx-auto">
               Start analyzing your transaction networks today. Quantora&apos;s graph intelligence catches fraud patterns that traditional systems miss.
             </p>
-            <motion.button onClick={() => router.push('/login')} className="inline-flex items-center gap-2 px-6 py-2.5 rounded-md bg-white text-[var(--bg)] text-[11px] font-mono font-semibold uppercase tracking-widest hover:bg-zinc-200 transition-all duration-150" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+            <motion.button onClick={() => router.push('/login')} className="inline-flex items-center gap-2 px-6 py-2.5 rounded-md bg-[var(--btn-primary-bg)] text-[var(--btn-primary-text)] text-[11px] font-mono font-semibold uppercase tracking-widest hover:bg-[var(--btn-primary-hover)] transition-all duration-150" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
               Get Started <ArrowRight size={12} strokeWidth={2} />
             </motion.button>
           </motion.div>
@@ -843,7 +843,7 @@ export default function LandingPage() {
       <footer className="relative z-10 border-t border-[var(--border)] py-8 px-6">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
-            <div className="w-5 h-5 bg-white rounded-sm flex items-center justify-center"><div className="w-2.5 h-2.5 bg-[var(--bg)] rounded-[1px]" /></div>
+            <div className="w-5 h-5 bg-[var(--btn-primary-bg)] rounded-sm flex items-center justify-center"><div className="w-2.5 h-2.5 bg-[var(--logo-inner)] rounded-[1px]" /></div>
             <span className="text-[10px] font-mono text-[var(--text-muted)]">Quantora AI — Network Risk Intelligence</span>
           </div>
           <div className="flex items-center gap-4 text-[9px] font-mono text-[var(--text-muted)]">

@@ -23,6 +23,14 @@ html {
   --risk-safe: #16a34a;
   --risk-warn: #ca8a04;
   --risk-danger: #dc2626;
+  --logo-inner: #09090b;
+  --btn-primary-bg: #09090b;
+  --btn-primary-text: #fafafa;
+  --btn-primary-hover: #27272a;
+  --graph-stroke-low: #94a3b8;
+  --graph-label: #64748b;
+  --graph-node-low: #3b82f6;
+  --chart-line-total: #64748b;
 }
 
 /* ── Dark theme ── */
@@ -41,6 +49,14 @@ html {
   --risk-safe: #4ade80;
   --risk-warn: #facc15;
   --risk-danger: #f87171;
+  --logo-inner: #0a0a0a;
+  --btn-primary-bg: #ffffff;
+  --btn-primary-text: #0a0a0a;
+  --btn-primary-hover: #e4e4e7;
+  --graph-stroke-low: #3f3f46;
+  --graph-label: #71717a;
+  --graph-node-low: #e2e8f0;
+  --chart-line-total: #3f3f46;
 }
 
 /* ── Base reset ── */

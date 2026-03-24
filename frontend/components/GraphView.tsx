@@ -24,13 +24,13 @@ type D3Link = {
 const NODE_COLORS: Record<string, string> = {
     high: '#dc2626',
     medium: '#d97706',
-    low: '#e2e8f0',
+    low: 'var(--graph-node-low)',
 };
 
 const EDGE_COLORS: Record<string, string> = {
     high: '#dc262680',
     medium: '#d9770680',
-    low: '#3f3f4680',
+    low: 'var(--graph-stroke-low)',
 };
 
 export default function GraphView({ nodes, edges, selectedNodeId, onNodeSelect }: GraphViewProps) {
@@ -171,7 +171,7 @@ export default function GraphView({ nodes, edges, selectedNodeId, onNodeSelect }
             .append('circle')
             .attr('r', d => (FRAUD_CLUSTER_IDS.includes(d.id) ? 12 : 9))
             .attr('fill', d => NODE_COLORS[d.risk])
-            .attr('stroke', d => (d.risk === 'high' ? '#ef4444' : '#52525b'))
+            .attr('stroke', d => (d.risk === 'high' ? '#ef4444' : 'var(--graph-stroke-low)'))
             .attr('stroke-width', d => (d.risk === 'high' ? 2 : 0.5))
             .attr('opacity', 0.95);
 
@@ -183,14 +183,14 @@ export default function GraphView({ nodes, edges, selectedNodeId, onNodeSelect }
             .attr('dy', '2em')
             .attr('font-size', '9px')
             .attr('font-family', 'JetBrains Mono, monospace')
-            .attr('fill', '#71717a')
+            .attr('fill', 'var(--graph-label)')
             .attr('pointer-events', 'none');
 
         // Highlight selected node
         const updateSelection = (selectedId: string | null) => {
             node.selectAll<SVGCircleElement, D3Node>('circle:nth-child(n+2)')
                 .attr('stroke', d =>
-                    d.id === selectedId ? '#ffffff' : d.risk === 'high' ? '#ef4444' : '#52525b'
+                    d.id === selectedId ? 'var(--text-primary)' : d.risk === 'high' ? '#ef4444' : 'var(--graph-stroke-low)'
                 )
                 .attr('stroke-width', d => (d.id === selectedId ? 2.5 : d.risk === 'high' ? 2 : 0.5));
         };
@@ -220,7 +220,7 @@ export default function GraphView({ nodes, edges, selectedNodeId, onNodeSelect }
         d3.select(svgRef.current)
             .selectAll<SVGCircleElement, D3Node>('g > g > circle:nth-child(n+2)')
             .attr('stroke', function (d) {
-                return d.id === selectedNodeId ? '#ffffff' : d.risk === 'high' ? '#ef4444' : '#52525b';
+                return d.id === selectedNodeId ? 'var(--text-primary)' : d.risk === 'high' ? '#ef4444' : 'var(--graph-stroke-low)';
             })
             .attr('stroke-width', function (d) {
                 return d.id === selectedNodeId ? 2.5 : d.risk === 'high' ? 2 : 0.5;
