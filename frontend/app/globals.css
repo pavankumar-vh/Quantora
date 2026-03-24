@@ -56,6 +56,14 @@ body {
   background-color: var(--bg);
   color: var(--text-primary);
   transition: background-color 0.2s ease, color 0.2s ease;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ── Mobile touch improvements ── */
+@media (max-width: 1023px) {
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
 }
 
 /* ── Light theme specific overrides ── */

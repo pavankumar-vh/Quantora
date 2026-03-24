@@ -100,11 +100,11 @@ export default function TransactionsPage() {
             <div className="flex-1 flex flex-col overflow-hidden">
 
                 {/* Header */}
-                <header className="h-14 flex-shrink-0 border-b border-[var(--border)] px-6 flex items-center justify-between">
-                    <div className="flex items-center gap-4">
+                <header className="min-h-[3.5rem] flex-shrink-0 border-b border-[var(--border)] px-4 sm:px-6 pl-14 lg:pl-6 flex flex-wrap items-center justify-between gap-2 py-2">
+                    <div className="flex items-center gap-2 sm:gap-4">
                         <BackButton />
-                        <div className="w-px h-4 bg-[var(--border)]" />
-                        <List size={14} strokeWidth={1.5} className="text-[var(--text-secondary)]" />
+                        <div className="hidden sm:block w-px h-4 bg-[var(--border)]" />
+                        <List size={14} strokeWidth={1.5} className="hidden sm:block text-[var(--text-secondary)]" />
                         <span className="text-xs font-semibold text-[var(--text-primary)]">Transactions</span>
                         <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-sm bg-zinc-700/40 border border-zinc-600/25 text-zinc-400">
                             {filtered.length} / {totalCount} records
@@ -119,7 +119,7 @@ export default function TransactionsPage() {
                 </header>
 
                 {/* Toolbar */}
-                <div className="flex-shrink-0 border-b border-[var(--border)] px-6 py-3 flex items-center gap-3">
+                <div className="flex-shrink-0 border-b border-[var(--border)] px-4 sm:px-6 py-3 flex flex-wrap items-center gap-3">
                     <div className="relative flex-1 max-w-xs">
                         <Search size={12} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
                         <input

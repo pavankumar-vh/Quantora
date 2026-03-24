@@ -100,9 +100,9 @@ export default function AdminPage() {
     return (
         <div className="flex h-screen bg-[var(--bg)] text-[var(--text-primary)]">
             <Sidebar />
-            <main className="flex-1 overflow-y-auto p-6">
+            <main className="flex-1 overflow-y-auto p-4 sm:p-6 pl-14 lg:pl-6">
                 {/* Header */}
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
                     <div>
                         <div className="flex items-center gap-2">
                             <ShieldCheck size={16} className="text-amber-400" />
@@ -142,7 +142,7 @@ export default function AdminPage() {
                         <h3 className="text-[10px] font-mono uppercase tracking-widest text-[var(--text-muted)] mb-3">
                             New User Account
                         </h3>
-                        <form onSubmit={handleCreate} className="grid grid-cols-2 gap-3">
+                        <form onSubmit={handleCreate} className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div>
                                 <label className="block text-[9px] font-mono uppercase tracking-widest text-[var(--text-muted)] mb-1">Full Name</label>
                                 <input
@@ -277,7 +277,7 @@ export default function AdminPage() {
                 {/* Info Panel */}
                 <div className="mt-4 p-3 bg-[var(--surface)] border border-[var(--border)] rounded-lg">
                     <p className="text-[9px] font-mono text-[var(--text-muted)] uppercase tracking-widest mb-1.5">Access Control</p>
-                    <div className="grid grid-cols-2 gap-3 text-[10px] font-mono text-[var(--text-secondary)]">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[10px] font-mono text-[var(--text-secondary)]">
                         <div className="flex items-start gap-2">
                             <ShieldCheck size={11} className="text-amber-400 mt-0.5 flex-shrink-0" />
                             <span><strong className="text-amber-400">Admin</strong> — Full platform access, user management, system configuration</span>

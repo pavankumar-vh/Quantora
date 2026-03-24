@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Network, Bell, Settings, BarChart3, GitBranch, List, Brain, Plug, Landmark, LogOut, ShieldCheck, Sun, Moon } from 'lucide-react';
+import { LayoutDashboard, Network, Bell, Settings, BarChart3, GitBranch, List, Brain, Plug, Landmark, LogOut, ShieldCheck, Sun, Moon, Menu, X } from 'lucide-react';
 import { logoutUser, getStoredUser, type AuthUser } from '@/lib/api';
 import { useTheme } from '@/components/ThemeProvider';
 
@@ -22,26 +22,70 @@ const NAV_ITEMS = [
 export default function Sidebar() {
     const pathname = usePathname();
     const [user, setUser] = useState<AuthUser | null>(null);
+    const [mobileOpen, setMobileOpen] = useState(false);
     const { theme, toggleTheme } = useTheme();
 
     useEffect(() => {
         setUser(getStoredUser());
     }, []);
 
+    // Close mobile sidebar on route change
+    useEffect(() => {
+        setMobileOpen(false);
+    }, [pathname]);
+
     function isActive(href: string) {
         if (href === '/') return pathname === '/';
         return pathname === href || pathname?.startsWith(href + '/');
     }
 
-    return (
-        <aside className="w-52 flex-shrink-0 h-full border-r border-[var(--border)] bg-[var(--bg)] flex flex-col">
+    const sidebarContent = (
+        <>
             {/* Logo */}
-            <Link href="/" className="h-14 flex items-center gap-2.5 px-4 border-b border-[var(--border)] hover:bg-[var(--surface)] transition-colors duration-150">
-                <div className="w-6 h-6 bg-white rounded-sm flex items-center justify-center flex-shrink-0">
-                    <div className="w-3 h-3 bg-[var(--bg)] rounded-[2px]" />
-                </div>
-                <span className="text-[var(--text-primary)] font-semibold text-sm tracking-tight">Quantora</span>
-            </Link>
+            <div className="h-14 flex items-center justify-between border-b border-[var(--border)]">
+                <Link href="/" className="flex-1 h-full flex items-center gap-2.5 px-4 hover:bg-[var(--surface)] transition-colors duration-150">
+                    <div className="w-6 h-6 bg-white rounded-sm flex items-center justify-center flex-shrink-0">
+                        <div className="w-3 h-3 bg-[var(--bg)] rounded-[2px]" />
+                    </div>
+                    <span className="text-[var(--text-primary)] font-semibold text-sm tracking-tight">Quantora</span>
+                </Link>
+                <button
+                    onClick={() => setMobileOpen(false)}
+                    className="lg:hidden p-2 mr-2 text-[var(--text-muted)] hover:text-[var(--text-primary)]"
+                >
+                    <X size={16} />
+                </button>
+            </div>
+        </>
+    );
+
+    return (
+        <>
+            {/* Mobile hamburger button */}
+            <button
+                onClick={() => setMobileOpen(true)}
+                className="lg:hidden fixed top-3 left-3 z-[60] p-2 rounded-md border border-[var(--border)] bg-[var(--bg)] text-[var(--text-primary)] hover:bg-[var(--surface)] transition-all"
+                aria-label="Open menu"
+            >
+                <Menu size={16} />
+            </button>
+
+            {/* Mobile overlay */}
+            {mobileOpen && (
+                <div
+                    className="lg:hidden fixed inset-0 bg-black/50 z-[70]"
+                    onClick={() => setMobileOpen(false)}
+                />
+            )}
+
+            {/* Sidebar */}
+            <aside className={`
+                fixed lg:relative z-[80] lg:z-auto
+                w-52 flex-shrink-0 h-full border-r border-[var(--border)] bg-[var(--bg)] flex flex-col
+                transition-transform duration-200 ease-in-out
+                ${mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+            `}>
+                {sidebarContent}
 
             {/* Nav */}
             <nav className="flex-1 py-3 px-2 space-y-0.5">
@@ -127,5 +171,6 @@ export default function Sidebar() {
                 </div>
             </div>
         </aside>
+        </>
     );
 }

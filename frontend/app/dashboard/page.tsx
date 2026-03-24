@@ -94,22 +94,22 @@ export default function DashboardPage() {
                 <PipelineStatusBar />
 
                 {/* System Status Bar */}
-                <header className="h-14 flex-shrink-0 border-b border-[var(--border)] px-6 flex items-center justify-between">
+                <header className="min-h-[3.5rem] flex-shrink-0 border-b border-[var(--border)] px-4 sm:px-6 pl-14 lg:pl-6 flex flex-wrap items-center justify-between gap-2 py-2">
                     <div className="flex items-center gap-4">
                         <div>
                             <span className="text-xs font-semibold text-[var(--text-primary)] tracking-tight">
                                 Executive Dashboard
                             </span>
-                            <span className="text-[10px] font-mono text-[var(--text-muted)] ml-2">
+                            <span className="hidden sm:inline text-[10px] font-mono text-[var(--text-muted)] ml-2">
                                 · Network Risk Intelligence
                             </span>
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
                         {/* Threat level */}
                         <div className="flex items-center gap-2">
-                            <span className="text-[9px] font-mono uppercase tracking-widest text-[var(--text-muted)]">
+                            <span className="hidden sm:inline text-[9px] font-mono uppercase tracking-widest text-[var(--text-muted)]">
                                 Threat Level
                             </span>
                             <span className={`text-[10px] font-mono font-semibold px-2 py-0.5 rounded-sm border ${threatColor}`}>
@@ -117,7 +117,7 @@ export default function DashboardPage() {
                             </span>
                         </div>
 
-                        <div className="w-px h-4 bg-[var(--border)]" />
+                        <div className="hidden sm:block w-px h-4 bg-[var(--border)]" />
 
                         {/* System active */}
                         <div className="flex items-center gap-1.5">
@@ -134,7 +134,7 @@ export default function DashboardPage() {
                             <span className="text-[9px] font-mono text-[var(--text-secondary)]">{clock}</span>
                         </div>
 
-                        <div className="w-px h-4 bg-[var(--border)]" />
+                        <div className="hidden sm:block w-px h-4 bg-[var(--border)]" />
 
                         {/* Theme */}
                         <button
@@ -149,10 +149,10 @@ export default function DashboardPage() {
                 </header>
 
                 {/* Scrollable body */}
-                <main className="flex-1 overflow-y-auto p-6 space-y-6">
+                <main className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 sm:space-y-6">
 
                     {/* KPI Cards */}
-                    <section className="grid grid-cols-2 xl:grid-cols-4 gap-4">
+                    <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
                         {dashboard.kpis.map(m => (
                             <KpiCard
                                 key={m.id}
@@ -166,11 +166,11 @@ export default function DashboardPage() {
                     </section>
 
                     {/* Charts */}
-                    <section className="grid grid-cols-3 gap-4">
-                        <div className="col-span-3 xl:col-span-2">
+                    <section className="grid grid-cols-1 xl:grid-cols-3 gap-3 sm:gap-4">
+                        <div className="xl:col-span-2">
                             <TrendChart data={dashboard.trend} />
                         </div>
-                        <div className="col-span-3 xl:col-span-1">
+                        <div className="xl:col-span-1">
                             <RiskDistribution data={dashboard.risk_distribution} />
                         </div>
                     </section>

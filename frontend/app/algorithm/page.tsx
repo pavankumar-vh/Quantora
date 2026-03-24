@@ -53,13 +53,13 @@ export default function AlgorithmPage() {
             <div className="flex-1 flex flex-col overflow-hidden">
 
                 {/* Header */}
-                <header className="h-14 flex-shrink-0 border-b border-[var(--border)] px-6 flex items-center justify-between">
-                    <div className="flex items-center gap-4">
+                <header className="min-h-[3.5rem] flex-shrink-0 border-b border-[var(--border)] px-4 sm:px-6 pl-14 lg:pl-6 flex flex-wrap items-center justify-between gap-2 py-2">
+                    <div className="flex items-center gap-2 sm:gap-4">
                         <BackButton />
-                        <div className="w-px h-4 bg-[var(--border)]" />
-                        <Brain size={14} strokeWidth={1.5} className="text-[var(--text-secondary)]" />
+                        <div className="hidden sm:block w-px h-4 bg-[var(--border)]" />
+                        <Brain size={14} strokeWidth={1.5} className="hidden sm:block text-[var(--text-secondary)]" />
                         <span className="text-xs font-semibold text-[var(--text-primary)]">Algorithm</span>
-                        <span className="text-[10px] font-mono text-[var(--text-muted)]">· SAGRA Documentation</span>
+                        <span className="hidden sm:inline text-[10px] font-mono text-[var(--text-muted)]">· SAGRA Documentation</span>
                     </div>
                     <div className="flex items-center gap-1.5">
                         <span className="text-[9px] font-mono px-2 py-0.5 rounded-sm bg-emerald-500/10 border border-emerald-500/25 text-emerald-400">
@@ -69,7 +69,7 @@ export default function AlgorithmPage() {
                 </header>
 
                 {/* Content */}
-                <main className="flex-1 overflow-y-auto p-6 space-y-5">
+                <main className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 sm:space-y-5">
 
                     {/* ── What is Sentinel? ── */}
                     <Section title="What is Sentinel?" icon={Shield}>
@@ -120,8 +120,8 @@ export default function AlgorithmPage() {
                             />
                         </div>
 
-                        <div className="mt-4 flex items-center gap-3 p-3 rounded-md bg-[var(--bg)] border border-[var(--border)]">
-                            <div className="text-[10px] font-mono text-[var(--text-muted)]">Decision Boundary →</div>
+                        <div className="mt-4 flex items-center gap-3 p-3 rounded-md bg-[var(--bg)] border border-[var(--border)] overflow-x-auto">
+                            <div className="text-[10px] font-mono text-[var(--text-muted)] flex-shrink-0">Decision Boundary →</div>
                             <code className="text-[11px] font-mono text-[var(--text-primary)]">
                                 FRS &gt; 0.7 → <span className="text-red-400 font-semibold">FRAUD</span>
                             </code>

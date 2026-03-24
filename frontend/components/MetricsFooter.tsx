@@ -36,7 +36,7 @@ export default function MetricsFooter({
     ];
 
     return (
-        <footer className="h-10 border-t border-[var(--border)] bg-[var(--bg)] flex items-center px-6 gap-0">
+        <footer className="h-auto sm:h-10 border-t border-[var(--border)] bg-[var(--bg)] flex flex-wrap items-center px-4 sm:px-6 py-2 sm:py-0 gap-2 sm:gap-0">
             {metrics.map((m, i) => (
                 <div key={m.label} className="flex items-center">
                     <div className="flex items-center gap-3">
@@ -51,7 +51,7 @@ export default function MetricsFooter({
                         )}
                     </div>
                     {i < metrics.length - 1 && (
-                        <div className="w-px h-4 bg-[var(--border)] mx-5" />
+                        <div className="hidden sm:block w-px h-4 bg-[var(--border)] mx-5" />
                     )}
                 </div>
             ))}

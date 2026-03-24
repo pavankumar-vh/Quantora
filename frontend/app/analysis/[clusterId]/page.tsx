@@ -15,10 +15,10 @@ export default function ClusterAnalysisPage() {
             <Sidebar />
             <div className="flex-1 flex flex-col overflow-hidden">
                 {/* Header */}
-                <header className="h-14 flex-shrink-0 border-b border-[var(--border)] px-6 flex items-center justify-between">
-                    <div className="flex items-center gap-4">
+                <header className="min-h-[3.5rem] flex-shrink-0 border-b border-[var(--border)] px-4 sm:px-6 pl-14 lg:pl-6 flex flex-wrap items-center justify-between gap-2 py-2">
+                    <div className="flex items-center gap-2 sm:gap-4">
                         <BackButton />
-                        <div className="w-px h-4 bg-[var(--border)]" />
+                        <div className="hidden sm:block w-px h-4 bg-[var(--border)]" />
                         <span className="text-xs font-semibold text-[var(--text-primary)]">
                             Cluster Analysis · <span className="font-mono text-red-400">{clusterId}</span>
                         </span>

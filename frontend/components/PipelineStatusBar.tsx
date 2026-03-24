@@ -29,8 +29,8 @@ export default function PipelineStatusBar() {
     ];
 
     return (
-        <div className="w-full border-b border-[var(--border)] bg-[var(--surface)]">
-            <div className="flex items-center justify-between px-4 py-2">
+        <div className="w-full border-b border-[var(--border)] bg-[var(--surface)] overflow-x-auto scrollbar-hide">
+            <div className="flex items-center justify-between px-4 py-2 min-w-[600px]">
                 <div className="flex items-center gap-1">
                     {stages.map((stage, i) => (
                         <div key={stage.name} className="flex items-center gap-1">

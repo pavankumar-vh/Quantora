@@ -610,13 +610,13 @@ export default function NetworkPage() {
             <div className="flex-1 flex flex-col overflow-hidden">
 
                 {/* Header */}
-                <header className="h-14 flex-shrink-0 border-b border-[var(--border)] px-6 flex items-center justify-between">
-                    <div className="flex items-center gap-4">
+                <header className="min-h-[3.5rem] flex-shrink-0 border-b border-[var(--border)] px-4 sm:px-6 pl-14 lg:pl-6 flex flex-wrap items-center justify-between gap-2 py-2">
+                    <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
                         <BackButton />
-                        <div className="w-px h-4 bg-[var(--border)]" />
-                        <GitBranch size={14} strokeWidth={1.5} className="text-[var(--text-secondary)]" />
+                        <div className="hidden sm:block w-px h-4 bg-[var(--border)]" />
+                        <GitBranch size={14} strokeWidth={1.5} className="hidden sm:block text-[var(--text-secondary)]" />
                         <span className="text-xs font-semibold text-[var(--text-primary)]">Transaction Network</span>
-                        <div className="flex items-center gap-2">
+                        <div className="hidden sm:flex items-center gap-2">
                             <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-sm bg-blue-500/10 border border-blue-500/25 text-blue-400">
                                 {stats.nodes} Nodes
                             </span>
@@ -628,8 +628,7 @@ export default function NetworkPage() {
                             </span>
                         </div>
                     </div>
-                    <div className="flex items-center gap-4">
-                        {/* Hovered node indicator */}
+                    <div className="hidden sm:flex items-center gap-4">
                         {hoveredNode && (
                             <div className="flex items-center gap-1.5 text-[9px] font-mono text-[var(--text-muted)] animate-fade-in">
                                 <Eye size={10} />
@@ -723,15 +722,17 @@ export default function NetworkPage() {
 
                     {/* Node Detail Sidebar */}
                     {selectedNode && (
-                        <NodeDetailPanel
-                            nodeId={selectedNode}
-                            onClose={() => setSelectedNode(null)}
-                            onSelectNode={(id) => setSelectedNode(id)}
-                        />
+                        <div className="absolute lg:relative inset-0 lg:inset-auto z-20 lg:z-auto">
+                            <NodeDetailPanel
+                                nodeId={selectedNode}
+                                onClose={() => setSelectedNode(null)}
+                                onSelectNode={(id) => setSelectedNode(id)}
+                            />
+                        </div>
                     )}
 
-                    {/* Risk Intelligence Panel — always visible */}
-                    <div className="w-[280px] flex-shrink-0 border-l border-[var(--border)] bg-[var(--surface)]">
+                    {/* Risk Intelligence Panel — hidden on mobile */}
+                    <div className="hidden lg:block w-[280px] flex-shrink-0 border-l border-[var(--border)] bg-[var(--surface)]">
                         <RiskPanel
                             selectedNode={nodes.find(n => n.id === selectedNode) ?? null}
                             riskScore={riskScore}

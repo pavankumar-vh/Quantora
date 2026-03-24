@@ -420,7 +420,7 @@ function ImportTab() {
                         <span className="text-[9px] font-mono text-[var(--text-muted)]">{uploadResult.filename}</span>
                     </div>
 
-                    <div className="grid grid-cols-3 divide-x divide-[var(--border)]">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-[var(--border)]">
                         <div className="px-5 py-4 text-center">
                             <p className="text-[18px] font-mono font-bold text-[var(--text-primary)]">{uploadResult.rows_processed}</p>
                             <p className="text-[9px] font-mono text-[var(--text-muted)] mt-0.5">Rows Processed</p>
@@ -696,7 +696,7 @@ function ManualEntryTab() {
                             </div>
 
                             {/* SAGRA Score Breakdown */}
-                            <div className="grid grid-cols-3 gap-3">
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                 <div className="px-3 py-2.5 rounded-md border border-[var(--border)] bg-[var(--bg)]">
                                     <p className="text-[9px] font-mono text-[var(--text-muted)] uppercase tracking-widest mb-1">TRS</p>
                                     <p className="text-[14px] font-mono font-bold text-[var(--text-primary)]">{result.trs.toFixed(4)}</p>
@@ -777,21 +777,21 @@ export default function BankInputPage() {
                 <PipelineStatusBar />
 
                 {/* Page Header */}
-                <header className="h-14 flex-shrink-0 border-b border-[var(--border)] px-6 flex items-center justify-between">
-                    <div className="flex items-center gap-4">
+                <header className="min-h-[3.5rem] flex-shrink-0 border-b border-[var(--border)] px-4 sm:px-6 pl-14 lg:pl-6 flex flex-wrap items-center justify-between gap-2 py-2">
+                    <div className="flex items-center gap-2 sm:gap-4">
                         <BackButton />
-                        <div className="w-px h-4 bg-[var(--border)]" />
-                        <Landmark size={14} strokeWidth={1.5} className="text-[var(--text-muted)]" />
+                        <div className="hidden sm:block w-px h-4 bg-[var(--border)]" />
+                        <Landmark size={14} strokeWidth={1.5} className="hidden sm:block text-[var(--text-muted)]" />
                         <div>
                             <span className="text-xs font-semibold text-[var(--text-primary)] tracking-tight">Bank Input</span>
-                            <span className="text-[10px] font-mono text-[var(--text-muted)] ml-2">· Ingest data into SAGRA</span>
+                            <span className="hidden sm:inline text-[10px] font-mono text-[var(--text-muted)] ml-2">· Ingest data into SAGRA</span>
                         </div>
                     </div>
                 </header>
 
                 {/* Tab Bar */}
-                <div className="flex-shrink-0 border-b border-[var(--border)] bg-[var(--surface)]">
-                    <div className="flex px-6">
+                <div className="flex-shrink-0 border-b border-[var(--border)] bg-[var(--surface)] overflow-x-auto">
+                    <div className="flex px-4 sm:px-6">
                         {TABS.map(tab => {
                             const active = activeTab === tab.id;
                             const Icon = tab.icon;
@@ -814,7 +814,7 @@ export default function BankInputPage() {
                 </div>
 
                 {/* Tab Content */}
-                <main className="flex-1 overflow-y-auto custom-scrollbar p-6">
+                <main className="flex-1 overflow-y-auto custom-scrollbar p-4 sm:p-6">
                     <div className="max-w-4xl">
                         {activeTab === 'connections' && <ConnectionsTab />}
                         {activeTab === 'import' && <ImportTab />}

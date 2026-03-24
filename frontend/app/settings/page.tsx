@@ -126,10 +126,10 @@ export default function SettingsPage() {
             <div className="flex-1 flex flex-col overflow-hidden">
 
                 {/* Header */}
-                <header className="h-14 flex-shrink-0 border-b border-[var(--border)] px-6 flex items-center justify-between">
-                    <div className="flex items-center gap-4">
+                <header className="min-h-[3.5rem] flex-shrink-0 border-b border-[var(--border)] px-4 sm:px-6 pl-14 lg:pl-6 flex flex-wrap items-center justify-between gap-2 py-2">
+                    <div className="flex items-center gap-2 sm:gap-4">
                         <BackButton />
-                        <div className="w-px h-4 bg-[var(--border)]" />
+                        <div className="hidden sm:block w-px h-4 bg-[var(--border)]" />
                         <Settings size={14} strokeWidth={1.5} className="text-[var(--text-muted)]" />
                         <span className="text-xs font-semibold text-[var(--text-primary)]">System Settings</span>
                     </div>
@@ -145,7 +145,7 @@ export default function SettingsPage() {
                 </header>
 
                 {/* Scrollable body */}
-                <main className="flex-1 overflow-y-auto p-6">
+                <main className="flex-1 overflow-y-auto p-4 sm:p-6">
                     <div className="max-w-2xl space-y-4">
 
                         {/* 1. Risk Configuration */}

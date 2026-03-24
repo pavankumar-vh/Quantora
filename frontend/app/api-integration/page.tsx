@@ -324,15 +324,15 @@ export default function ApiIntegrationPage() {
                 <PipelineStatusBar />
 
                 {/* Page Header */}
-                <header className="h-14 flex-shrink-0 border-b border-[var(--border)] px-6 flex items-center justify-between">
-                    <div className="flex items-center gap-4">
+                <header className="min-h-[3.5rem] flex-shrink-0 border-b border-[var(--border)] px-4 sm:px-6 pl-14 lg:pl-6 flex flex-wrap items-center justify-between gap-2 py-2">
+                    <div className="flex items-center gap-2 sm:gap-4">
                         <BackButton />
                         <div>
                             <span className="text-xs font-semibold text-[var(--text-primary)] tracking-tight">API Integration</span>
-                            <span className="text-[10px] font-mono text-[var(--text-muted)] ml-2">· Endpoint Testing & Monitoring</span>
+                            <span className="hidden sm:inline text-[10px] font-mono text-[var(--text-muted)] ml-2">· Endpoint Testing & Monitoring</span>
                         </div>
                     </div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
                         {/* Backend Status */}
                         <div className="flex items-center gap-1.5">
                             {backendUp ? (
@@ -350,13 +350,14 @@ export default function ApiIntegrationPage() {
                                 </>
                             )}
                         </div>
-                        <div className="w-px h-4 bg-[var(--border)]" />
+                        <div className="hidden sm:block w-px h-4 bg-[var(--border)]" />
                         <button
                             onClick={testAll}
                             className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-mono border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--surface)] hover:border-zinc-500 transition-all duration-150"
                         >
                             <Zap size={11} />
-                            Test All Endpoints
+                            <span className="hidden sm:inline">Test All Endpoints</span>
+                            <span className="sm:hidden">Test</span>
                         </button>
                     </div>
                 </header>
@@ -366,7 +367,7 @@ export default function ApiIntegrationPage() {
 
                     {/* Connection Overview Strip */}
                     <div className="border-b border-[var(--border)] bg-[var(--surface)]">
-                        <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 divide-x divide-[var(--border)]">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 divide-y sm:divide-y-0 sm:divide-x divide-[var(--border)]">
                             {/* Backend */}
                             <div className="px-5 py-4">
                                 <div className="flex items-center gap-2 mb-1.5">

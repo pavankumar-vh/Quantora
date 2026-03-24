@@ -14,7 +14,7 @@ import {
   Brain, Eye, Globe, Lock, Cpu,
   AlertTriangle, CheckCircle, GitBranch, Layers,
   Search, BarChart3, Users, Database, Server, Code,
-  TrendingUp, FileText, Fingerprint, Workflow, Check, X
+  TrendingUp, FileText, Fingerprint, Workflow, Check, X, Menu
 } from 'lucide-react';
 import { isAuthenticated } from '@/lib/api';
 
@@ -299,6 +299,7 @@ function StatCard({ value, suffix, label, delay }: { value: number; suffix: stri
 export default function LandingPage() {
   const router = useRouter();
   const [authed, setAuthed] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -120]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -60]);
@@ -369,13 +370,13 @@ export default function LandingPage() {
         animate={{ y: 0 }}
         transition={{ duration: 0.4, ease: 'easeOut' }}
       >
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
           <motion.div className="flex items-center gap-2.5 cursor-pointer" whileHover={{ scale: 1.02 }}>
             <div className="w-6 h-6 bg-white rounded-sm flex items-center justify-center flex-shrink-0">
               <div className="w-3 h-3 bg-[var(--bg)] rounded-[2px]" />
             </div>
             <span className="text-[var(--text-primary)] font-semibold text-sm tracking-tight">Quantora</span>
-            <span className="text-[9px] font-mono text-[var(--text-muted)] uppercase tracking-widest">v3.0</span>
+            <span className="hidden sm:inline text-[9px] font-mono text-[var(--text-muted)] uppercase tracking-widest">v3.0</span>
           </motion.div>
 
           <div className="hidden md:flex items-center gap-6">
@@ -386,8 +387,8 @@ export default function LandingPage() {
             ))}
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1.5 mr-2">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="hidden sm:flex items-center gap-1.5 mr-2">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
@@ -395,26 +396,49 @@ export default function LandingPage() {
               <span className="text-[9px] font-mono text-emerald-400">Online</span>
             </div>
             {authed ? (
-              <motion.button onClick={() => router.push('/dashboard')} className="px-4 py-2 rounded-md bg-white text-[var(--bg)] text-[11px] font-mono font-semibold uppercase tracking-widest hover:bg-zinc-200 transition-all duration-150" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+              <motion.button onClick={() => router.push('/dashboard')} className="px-3 sm:px-4 py-2 rounded-md bg-white text-[var(--bg)] text-[11px] font-mono font-semibold uppercase tracking-widest hover:bg-zinc-200 transition-all duration-150" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
                 Dashboard
               </motion.button>
             ) : (
               <>
-                <motion.button onClick={() => router.push('/login')} className="px-3 py-2 text-[11px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors duration-150" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                <motion.button onClick={() => router.push('/login')} className="hidden sm:block px-3 py-2 text-[11px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors duration-150" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
                   Sign In
                 </motion.button>
-                <motion.button onClick={() => router.push('/login')} className="flex items-center gap-1.5 px-4 py-2 rounded-md bg-white text-[var(--bg)] text-[11px] font-mono font-semibold uppercase tracking-widest hover:bg-zinc-200 transition-all duration-150" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                <motion.button onClick={() => router.push('/login')} className="flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-md bg-white text-[var(--bg)] text-[10px] sm:text-[11px] font-mono font-semibold uppercase tracking-widest hover:bg-zinc-200 transition-all duration-150" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
                   Get Started <ArrowRight size={11} strokeWidth={2} />
                 </motion.button>
               </>
             )}
+            {/* Mobile menu toggle */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 text-[var(--text-muted)] hover:text-[var(--text-primary)]"
+            >
+              {mobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile nav dropdown */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t border-[var(--border)] bg-[var(--bg)]/95 backdrop-blur-md px-4 py-3 space-y-2">
+            {['Features', 'Algorithm', 'Use Cases', 'Pipeline', 'Metrics', 'Stack'].map((label) => (
+              <a
+                key={label}
+                href={`#${label.toLowerCase().replace(' ', '-')}`}
+                onClick={() => setMobileMenuOpen(false)}
+                className="block text-[11px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] py-1.5 transition-colors duration-150"
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+        )}
       </motion.nav>
 
       {/* ─────── HERO ─────── */}
       <motion.section className="relative z-10 min-h-screen flex items-center pt-14" style={{ opacity: heroOpacity }}>
-        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center w-full">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center w-full">
 
           {/* Left — Copy with Typewriter */}
           <div>
@@ -429,7 +453,7 @@ export default function LandingPage() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}>
-              <h1 className="text-3xl md:text-4xl font-semibold text-[var(--text-primary)] leading-tight mb-2 tracking-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-[var(--text-primary)] leading-tight mb-2 tracking-tight">
                 Network Risk Intelligence
               </h1>
               <div className="h-6 mb-6">
@@ -510,17 +534,17 @@ export default function LandingPage() {
       </motion.section>
 
       {/* ─────── FEATURES ─────── */}
-      <section id="features" className="relative z-10 py-24 px-6">
+      <section id="features" className="relative z-10 py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <SectionHeader icon={Layers} label="Capabilities" title="Intelligence at Every Layer" desc="From raw transaction data to actionable intelligence — Quantora's AI-powered pipeline catches what rules-based systems miss." />
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {features.map((f, i) => <FeatureCard key={f.title} {...f} delay={i * 0.08} />)}
           </div>
         </div>
       </section>
 
       {/* ─────── SAGRA ALGORITHM ─────── */}
-      <section id="algorithm" className="relative z-10 py-24 px-6">
+      <section id="algorithm" className="relative z-10 py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <SectionHeader icon={Brain} label="Algorithm" title="SAGRA Risk Scoring Engine" desc="Sentinel Adaptive Graph Risk Algorithm — four weighted components produce a deterministic risk score per transaction." />
 
@@ -545,7 +569,7 @@ export default function LandingPage() {
           </motion.div>
 
           {/* Component cards */}
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid sm:grid-cols-2 gap-4">
             {sagraFormula.map((comp, i) => (
               <motion.div
                 key={comp.label}
@@ -573,11 +597,11 @@ export default function LandingPage() {
       </section>
 
       {/* ─────── USE CASES ─────── */}
-      <section id="use-cases" className="relative z-10 py-24 px-6">
+      <section id="use-cases" className="relative z-10 py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <SectionHeader icon={Search} label="Use Cases" title="What Quantora Catches" desc="Real-world fraud scenarios that graph-based detection exposes while traditional systems remain blind." />
 
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid sm:grid-cols-2 gap-4">
             {useCases.map((uc, i) => (
               <motion.div
                 key={uc.title}
@@ -611,8 +635,8 @@ export default function LandingPage() {
       </section>
 
       {/* ─────── COMPARISON TABLE ─────── */}
-      <section className="relative z-10 py-24 px-6">
-        <div className="max-w-4xl mx-auto">
+      <section className="relative z-10 py-16 sm:py-24 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto overflow-x-auto">
           <SectionHeader icon={BarChart3} label="Comparison" title="Quantora vs Traditional Systems" desc="Why graph-based intelligence outperforms legacy rule-based fraud detection at every level." />
 
           <motion.div
@@ -660,8 +684,8 @@ export default function LandingPage() {
       </section>
 
       {/* ─────── PIPELINE ─────── */}
-      <section id="pipeline" className="relative z-10 py-24 px-6">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-start">
+      <section id="pipeline" className="relative z-10 py-16 sm:py-24 px-4 sm:px-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
           <div>
             <SectionHeader icon={GitBranch} label="Pipeline" title="How Quantora Works" desc="Four stages from data ingestion to actionable fraud intelligence." />
             <div className="space-y-1">
@@ -722,7 +746,7 @@ export default function LandingPage() {
       </section>
 
       {/* ─────── METRICS ─────── */}
-      <section id="metrics" className="relative z-10 py-24 px-6">
+      <section id="metrics" className="relative z-10 py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <SectionHeader icon={Activity} label="Performance" title="Built for Scale" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -735,7 +759,7 @@ export default function LandingPage() {
       </section>
 
       {/* ─────── TECH STACK ─────── */}
-      <section id="stack" className="relative z-10 py-24 px-6">
+      <section id="stack" className="relative z-10 py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <SectionHeader icon={Code} label="Architecture" title="Technology Stack" desc="Purpose-built with modern, battle-tested technologies for reliability and performance." />
 
@@ -798,9 +822,9 @@ export default function LandingPage() {
       </section>
 
       {/* ─────── CTA ─────── */}
-      <section className="relative z-10 py-24 px-6">
+      <section className="relative z-10 py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
-          <motion.div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-10 md:p-14 text-center" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4 }}>
+          <motion.div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-6 sm:p-10 md:p-14 text-center" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4 }}>
             <motion.div className="w-10 h-10 mx-auto mb-6 rounded-md bg-white flex items-center justify-center" animate={{ rotate: [0, 3, 0, -3, 0] }} transition={{ duration: 8, repeat: Infinity }}>
               <Shield size={18} strokeWidth={1.5} className="text-[var(--bg)]" />
             </motion.div>
