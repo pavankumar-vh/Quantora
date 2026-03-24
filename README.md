@@ -3,11 +3,12 @@
   <h1>Quantora AI</h1>
   <p><strong>Network Risk Intelligence — Real-Time Graph-Based Fraud Detection</strong></p>
   <p>
-    <img src="https://img.shields.io/badge/version-3.0.0-blue?style=flat-square" alt="Version" />
+    <img src="https://img.shields.io/badge/version-3.1.0-blue?style=flat-square" alt="Version" />
     <img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="License" />
     <img src="https://img.shields.io/badge/python-3.11+-yellow?style=flat-square&logo=python&logoColor=white" alt="Python" />
     <img src="https://img.shields.io/badge/next.js-14.2-black?style=flat-square&logo=next.js" alt="Next.js" />
     <img src="https://img.shields.io/badge/fastapi-0.104+-teal?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI" />
+    <img src="https://img.shields.io/badge/responsive-mobile%20first-purple?style=flat-square" alt="Responsive" />
   </p>
   <p><em>Team Overdrive — DigitHon 3.0 FinTech Track</em></p>
 </div>
@@ -27,6 +28,8 @@ Traditional fraud systems analyze transactions as isolated rows. Quantora treats
 - **Real-Time Alerts** — Instant alert generation with configurable thresholds and escalation rules
 - **Visual Intelligence** — Interactive force-directed network graphs for fraud investigation
 - **Bank-Grade Security** — JWT + bcrypt auth, RBAC, security headers, CORS lockdown, audit logging
+- **Fully Responsive** — Mobile-first design with adaptive layouts for desktop, tablet, and mobile
+- **Live Demo Simulation** — Built-in simulation overlay streams synthetic transactions for instant demos
 
 ---
 
@@ -97,9 +100,11 @@ Quantora-AI/
 │   │   ├── Navbar.tsx          # Top navigation bar
 │   │   ├── RiskPanel.tsx       # Risk score breakdown
 │   │   ├── TransactionFeed.tsx # Live transaction stream
-│   │   ├── SimulationOverlay.tsx
+│   │   ├── SimulationOverlay.tsx # Always-on demo simulation panel
+│   │   ├── PipelineStatusBar.tsx # Real-time pipeline status
+│   │   ├── MetricsFooter.tsx   # System metrics display
 │   │   ├── ThemeProvider.tsx   # Dark/light theme context
-│   │   ├── auth/               # Login & MFA components
+│   │   ├── auth/               # Login, MFA & route guard
 │   │   ├── dashboard/          # KPI, cluster, trend components
 │   │   └── ui/                 # Reusable UI primitives
 │   └── lib/
@@ -308,7 +313,29 @@ Base URL: `http://localhost:8000`
 | False Positive Rate | < 2% | 15–30% |
 
 ---
+## Features
 
+### Responsive Mobile-First Design
+
+Every page adapts seamlessly from mobile (320px) to ultrawide (2560px+):
+
+- **Sidebar** — Collapses to a hamburger slide-out drawer on mobile with overlay backdrop
+- **Dashboard** — KPI cards, cluster tables, and charts stack vertically on small screens
+- **Network Graph** — Full-bleed D3 visualization with touch-friendly zoom and pan
+- **Landing Page** — Responsive navbar with mobile dropdown, adaptive hero grid
+- **All Pages** — Flexible headers with wrap support, responsive padding and grids
+
+### Demo Simulation Overlay
+
+A persistent floating panel that streams synthetic transactions directly to the backend:
+
+- **Starts minimized** as a compact pill in the bottom-right corner
+- **Inline controls** — Start/Stop accessible even when minimized
+- **Expand** to see live transaction log, fraud counts, and bank link stats
+- **Responsive sizing** — Full-width on mobile, fixed-width on desktop
+- Generates realistic transactions, bank connections, and CSV uploads automatically
+
+---
 ## Screenshots
 
 | Dashboard | Network Graph | Landing Page |
@@ -335,6 +362,6 @@ This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for d
 
 <div align="center">
   <p>Built by <strong>Team Overdrive</strong> at DigitHon 3.0</p>
-  <p><sub>Quantora AI v3.0 — Network Risk Intelligence</sub></p>
+  <p><sub>Quantora AI v3.1 — Network Risk Intelligence</sub></p>
 </div>
 
