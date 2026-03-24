@@ -91,7 +91,7 @@ interface LogEntry {
 
 export default function SimulationOverlay() {
     const [running, setRunning] = useState(false);
-    const [minimized, setMinimized] = useState(false);
+    const [minimized, setMinimized] = useState(true);
     const [log, setLog] = useState<LogEntry[]>([]);
     const [stats, setStats] = useState({ txCount: 0, fraudCount: 0, bankLinks: 0, filesProcessed: 0 });
     const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -292,12 +292,15 @@ export default function SimulationOverlay() {
 
     return (
         <div
-            className="fixed bottom-4 right-4 left-4 sm:left-auto z-[9999] font-mono animate-fade-in"
-            style={{ width: minimized ? '200px' : undefined, maxWidth: minimized ? undefined : '420px' }}
+            className={`fixed z-[9999] font-mono animate-fade-in transition-all duration-200 ${
+                minimized
+                    ? 'bottom-4 right-4 w-auto'
+                    : 'bottom-3 right-3 left-3 sm:left-auto sm:bottom-4 sm:right-4 sm:w-[380px] md:w-[420px]'
+            }`}
         >
             <div className="rounded-xl border border-[var(--border)] bg-[var(--panel-overlay)] backdrop-blur-xl shadow-2xl shadow-black/20 overflow-hidden">
                 {/* Header */}
-                <div className="px-4 py-2.5 border-b border-[var(--border)] flex items-center gap-2.5 bg-[var(--surface)]">
+                <div className="px-3 sm:px-4 py-2 sm:py-2.5 border-b border-[var(--border)] flex items-center gap-2 bg-[var(--surface)]">
                     <div className="relative flex-shrink-0">
                         {running ? (
                             <span className="relative flex h-2 w-2">
@@ -308,35 +311,51 @@ export default function SimulationOverlay() {
                             <span className="inline-flex rounded-full h-2 w-2 bg-zinc-600" />
                         )}
                     </div>
-                    <span className="text-[10px] font-semibold text-[var(--text-primary)] flex-1 tracking-wide">
-                        DEMO SIMULATION
+                    <span className="text-[9px] sm:text-[10px] font-semibold text-[var(--text-primary)] flex-1 tracking-wide">
+                        DEMO{!minimized && <span className="hidden sm:inline"> SIMULATION</span>}
                     </span>
 
                     {/* Minimize */}
+                    {minimized && (
+                        !running ? (
+                            <button
+                                onClick={startSimulation}
+                                className="flex items-center gap-1 px-2 py-0.5 rounded text-[8px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/30 transition-all"
+                            >
+                                <Play size={8} /> Start
+                            </button>
+                        ) : (
+                            <button
+                                onClick={stopSimulation}
+                                className="flex items-center gap-1 px-2 py-0.5 rounded text-[8px] font-semibold bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30 transition-all"
+                            >
+                                <Square size={8} /> Stop
+                            </button>
+                        )
+                    )}
                     <button
                         onClick={() => setMinimized(m => !m)}
                         className="text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors p-0.5"
                     >
                         {minimized ? <Eye size={11} /> : <EyeOff size={11} />}
                     </button>
-
-
                 </div>
 
-                {/* Mini stats bar (always visible) */}
-                <div className="px-4 py-2 border-b border-[var(--border)] flex items-center justify-between bg-[var(--bg)]">
-                    <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-1.5">
+                {/* Mini stats bar */}
+                {!minimized && (
+                <div className="px-3 sm:px-4 py-1.5 sm:py-2 border-b border-[var(--border)] flex items-center justify-between bg-[var(--bg)] gap-2">
+                    <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
+                        <div className="flex items-center gap-1">
                             <Zap size={9} className="text-amber-400" />
-                            <span className="text-[10px] text-[var(--text-primary)]">{stats.txCount}</span>
-                            <span className="text-[8px] text-[var(--text-muted)]">tx</span>
+                            <span className="text-[9px] sm:text-[10px] text-[var(--text-primary)]">{stats.txCount}</span>
+                            <span className="text-[7px] sm:text-[8px] text-[var(--text-muted)]">tx</span>
                         </div>
-                        <div className="flex items-center gap-1.5">
+                        <div className="flex items-center gap-1">
                             <AlertTriangle size={9} className="text-red-400" />
-                            <span className="text-[10px] text-red-400">{stats.fraudCount}</span>
-                            <span className="text-[8px] text-[var(--text-muted)]">fraud</span>
+                            <span className="text-[9px] sm:text-[10px] text-red-400">{stats.fraudCount}</span>
+                            <span className="text-[7px] sm:text-[8px] text-[var(--text-muted)]">fraud</span>
                         </div>
-                        <div className="flex items-center gap-1.5">
+                        <div className="hidden sm:flex items-center gap-1">
                             <Activity size={9} className="text-blue-400" />
                             <span className="text-[10px] text-[var(--text-primary)]">{stats.bankLinks}</span>
                             <span className="text-[8px] text-[var(--text-muted)]">banks</span>
@@ -344,11 +363,11 @@ export default function SimulationOverlay() {
                     </div>
 
                     {/* Play/Stop */}
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-1.5 flex-shrink-0">
                         {!running ? (
                             <button
                                 onClick={startSimulation}
-                                className="flex items-center gap-1.5 px-3 py-1 rounded-md text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/30 transition-all"
+                                className="flex items-center gap-1 px-2.5 sm:px-3 py-1 rounded-md text-[9px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/30 transition-all"
                             >
                                 <Play size={9} />
                                 Start
@@ -356,7 +375,7 @@ export default function SimulationOverlay() {
                         ) : (
                             <button
                                 onClick={stopSimulation}
-                                className="flex items-center gap-1.5 px-3 py-1 rounded-md text-[9px] font-semibold bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30 transition-all"
+                                className="flex items-center gap-1 px-2.5 sm:px-3 py-1 rounded-md text-[9px] font-semibold bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30 transition-all"
                             >
                                 <Square size={9} />
                                 Stop
@@ -364,23 +383,23 @@ export default function SimulationOverlay() {
                         )}
                     </div>
                 </div>
+                )}
 
                 {/* Log (collapsible) */}
                 {!minimized && (
-                    <div className="max-h-[260px] overflow-y-auto custom-scrollbar bg-[var(--bg)]">
+                    <div className="max-h-[160px] sm:max-h-[220px] overflow-y-auto custom-scrollbar bg-[var(--bg)]">
                         {log.length === 0 ? (
-                            <div className="flex flex-col items-center justify-center py-8 gap-2 text-[var(--text-muted)]">
-                                <Loader2 size={16} className="opacity-30" />
+                            <div className="flex flex-col items-center justify-center py-6 gap-2 text-[var(--text-muted)]">
+                                <Loader2 size={14} className="opacity-30" />
                                 <p className="text-[9px]">Press Start to begin simulation</p>
-                                <p className="text-[8px] opacity-50">Transactions will stream into the dashboard</p>
                             </div>
                         ) : (
-                            <div className="p-3 space-y-1">
+                            <div className="p-2 sm:p-3 space-y-0.5 sm:space-y-1">
                                 {log.map(entry => (
-                                    <div key={entry.id} className="flex items-start gap-2 animate-fade-in">
-                                        <span className="text-[8px] text-zinc-600 flex-shrink-0 w-[52px] pt-px">{entry.time}</span>
+                                    <div key={entry.id} className="flex items-start gap-1.5 sm:gap-2 animate-fade-in">
+                                        <span className="text-[7px] sm:text-[8px] text-zinc-600 flex-shrink-0 w-[44px] sm:w-[52px] pt-px">{entry.time}</span>
                                         {typeIcon(entry.type)}
-                                        <span className={`text-[9px] leading-snug ${typeColor(entry.type)}`}>
+                                        <span className={`text-[8px] sm:text-[9px] leading-snug break-all ${typeColor(entry.type)}`}>
                                             {entry.message}
                                         </span>
                                     </div>
